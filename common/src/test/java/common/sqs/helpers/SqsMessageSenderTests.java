@@ -8,8 +8,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
-import testClasses.MessageOfTypeB;
-import testClasses.SqsMessageSenderForTests;
+import common.sqs.helpers.testClasses.MessageOfTypeB;
+import common.sqs.helpers.testClasses.SqsMessageSenderForTests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;

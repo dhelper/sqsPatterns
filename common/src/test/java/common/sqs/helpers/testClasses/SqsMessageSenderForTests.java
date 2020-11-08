@@ -1,4 +1,4 @@
-package testClasses;
+package common.sqs.helpers.testClasses;
 
 import com.amazonaws.services.sqs.AmazonSQS;
 import common.sqs.helpers.SqsMessageSenderBase;
