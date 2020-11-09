@@ -12,9 +12,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import testClasses.MessageOfTypeA;
-import testClasses.MessageOfTypeB;
-import testClasses.SqsMessageListenerForTests;
+import common.sqs.helpers.testClasses.MessageOfTypeA;
+import common.sqs.helpers.testClasses.MessageOfTypeB;
+import common.sqs.helpers.testClasses.SqsMessageListenerForTests;
 
 import javax.jms.JMSException;
 import java.util.Map;
