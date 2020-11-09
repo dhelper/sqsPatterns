@@ -19,8 +19,6 @@ import java.lang.reflect.Type;
 @SpringBootTest(classes = SenderServiceApplication.class, webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @TestPropertySource(locations = "classpath:test.properties")
 public class CucumberContext {
-    public final static String BASE_URL = "http://localhost:9400/api/persons";
-
     @DefaultParameterTransformer
     @DefaultDataTableEntryTransformer
     @DefaultDataTableCellTransformer
