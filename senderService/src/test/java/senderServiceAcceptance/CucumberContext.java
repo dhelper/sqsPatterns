@@ -15,9 +15,9 @@ import senderService.SenderServiceApplication;
 import java.lang.reflect.Type;
 
 @CucumberContextConfiguration()
+@TestPropertySource(locations = "classpath:test.properties")
 @ContextConfiguration(classes = {ScenarioContext.class, TestConfiguration.class})
 @SpringBootTest(classes = SenderServiceApplication.class, webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-@TestPropertySource(locations = "classpath:test.properties")
 public class CucumberContext {
     @DefaultParameterTransformer
     @DefaultDataTableEntryTransformer
