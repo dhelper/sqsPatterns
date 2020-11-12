@@ -1,2 +1,6 @@
-C:\Dev\Sources\RND\sqsPatterns\senderService\src\main\java\senderService\SpringConfiguration.java
-C:\Dev\Sources\RND\sqsPatterns\senderService\src\main\java\senderService\SenderServiceApplication.java
+C:\Dev\RND\sqsPatterns\senderService\src\main\java\senderService\controllers\entities\MessageData.java
+C:\Dev\RND\sqsPatterns\senderService\src\main\java\senderService\controllers\SenderController.java
+C:\Dev\RND\sqsPatterns\senderService\src\main\java\senderService\SenderServiceApplication.java
+C:\Dev\RND\sqsPatterns\senderService\src\main\java\senderService\logic\SenderService.java
+C:\Dev\RND\sqsPatterns\senderService\src\main\java\senderService\logic\SenderServiceImpl.java
+C:\Dev\RND\sqsPatterns\senderService\src\main\java\senderService\SpringConfiguration.java
