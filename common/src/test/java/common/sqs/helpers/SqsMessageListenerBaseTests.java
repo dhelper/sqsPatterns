@@ -86,6 +86,8 @@ public class SqsMessageListenerBaseTests {
     @Test
     void onMessage_gotEmptyMessage_returnWithoutAch() throws JMSException {
         Message message = new Message()
+                .withMessageAttributes(Map.of(
+                        AttributesNames.MessageClass, new MessageAttributeValue().withDataType("String").withStringValue(MessageOfTypeB.class.getName())))
                 .withAttributes(Map.of("ApproximateReceiveCount", "1"))
                 .withMessageId("msg-1");
 
@@ -95,10 +97,9 @@ public class SqsMessageListenerBaseTests {
     }
 
     @Test
-    void onMessage_gotMessageWithoutMessageClass_returnAfterAch() throws JMSException {
+    void onMessage_gotMessageWithoutMessageClass_returnWithoutAch() throws JMSException {
         Message message = new Message()
                 .withBody("{\"text\":\"blah blah\"}")
-
                 .withAttributes(Map.of("ApproximateReceiveCount", "1"))
                 .withMessageId("msg-1");
 
