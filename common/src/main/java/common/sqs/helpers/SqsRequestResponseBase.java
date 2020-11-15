@@ -1,5 +1,6 @@
 package common.sqs.helpers;
 
+import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.util.StringUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,16 +13,20 @@ import javax.jms.MessageListener;
 import javax.jms.TextMessage;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Consumer;
+import java.util.function.Function;
 
 @Slf4j
-public abstract class SqsMessageListenerBase implements MessageListener {
-    private final Map<String, Consumer<Object>> typeToAction = new HashMap<>();
+public abstract class SqsRequestResponseBase extends SqsMessageSender implements MessageListener {
+    private final Map<String, Function<Object, Object>> typeToAction = new HashMap<>();
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    @SuppressWarnings("unchecked")
-    protected <T> void registerMessage(Class<? super T> messageType, Consumer<? super T> messageHandler) {
-        typeToAction.put(messageType.getName(), o -> messageHandler.accept((T) o));
+    public SqsRequestResponseBase(AmazonSQS sqsClient,
+                                  @Value("${sqs.response.queue.name}") String responseQueueName) {
+        super(sqsClient, responseQueueName);
+    }
+
+    protected <T, R> void registerMessage(Class<? super T> messageType, Function<? super T, ? super R> messageHandler) {
+        typeToAction.put(messageType.getName(), o -> messageHandler.apply((T) o));
     }
 
     @Override
@@ -44,7 +49,6 @@ public abstract class SqsMessageListenerBase implements MessageListener {
 
             handleMessage(textMessage.getText(), messageClass);
 
-            message.acknowledge();
         } catch (Exception exc) {
             log.error("Error while processing message:", exc);
         }
@@ -57,9 +61,11 @@ public abstract class SqsMessageListenerBase implements MessageListener {
 
             var message = objectMapper.readValue(text, aClass);
 
-            final Consumer<Object> consumer = typeToAction.get(messageClass);
+            final Function<Object, Object> consumer = typeToAction.get(messageClass);
 
-            consumer.accept(message);
+            var response = consumer.apply(message);
+
+            sendMessage(response);
         }
     }
 }

@@ -9,11 +9,11 @@ import common.sqs.contracts.AttributesNames;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class SqsMessageSenderBase {
+public class SqsMessageSender {
     private final AmazonSQS sqsClient;
     private final String queueName;
 
-    public SqsMessageSenderBase( AmazonSQS sqsClient, String queueName) {
+    public SqsMessageSender(AmazonSQS sqsClient, String queueName) {
         this.sqsClient = sqsClient;
         this.queueName = queueName;
     }

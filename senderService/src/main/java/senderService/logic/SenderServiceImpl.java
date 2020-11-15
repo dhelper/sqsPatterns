@@ -2,7 +2,7 @@ package senderService.logic;
 
 import com.amazonaws.services.sqs.AmazonSQS;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import common.sqs.helpers.SqsMessageSenderBase;
+import common.sqs.helpers.SqsMessageSender;
 import lombok.extern.slf4j.Slf4j;
 import messages.MyOtherMessage;
 import messages.MySimpleMessage;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class SenderServiceImpl extends SqsMessageSenderBase implements SenderService {
+public class SenderServiceImpl extends SqsMessageSender implements SenderService {
     public SenderServiceImpl(AmazonSQS sqsClient,
                              @Value("${sqs.sender.queue.name}")String queueName) {
         super(sqsClient, queueName);
